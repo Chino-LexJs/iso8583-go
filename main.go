@@ -1,8 +1,12 @@
 package main
 
 import (
+	"net/http"
+
 	"github.com/Chino-LexJs/iso8583-go/db"
 	"github.com/Chino-LexJs/iso8583-go/models"
+	"github.com/Chino-LexJs/iso8583-go/routes"
+	"github.com/gorilla/mux"
 )
 
 func main() {
@@ -14,5 +18,11 @@ func main() {
 	db.DB.AutoMigrate(models.Message_request{})
 	models.AddTerminal()
 	models.AddTransaction()
-
+	// creating routes to server
+	r := mux.NewRouter()
+	// Home router
+	r.HandleFunc("/", routes.HomeHandler)
+	r.HandleFunc("/requestPayment", routes.PostRequestPayment).Methods("POST")
+	// start server
+	http.ListenAndServe(":3000", r)
 }
