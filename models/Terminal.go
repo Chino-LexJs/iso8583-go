@@ -30,6 +30,27 @@ type RequestPaymentMessage struct {
 	Localtime string `json:"localtime"`
 	Amount    string `json:"amount"`
 }
+type ExecutePaymentMessage struct {
+	Id     int
+	Type   string
+	Device struct {
+		Authentication string
+		Failcounter    int
+		Realcounter    int
+		Ksn            string
+	}
+	CardInformation struct {
+		Bin           string
+		Cvv_length    int
+		Cvv_present   bool
+		Emv_tags      string
+		Cardholder    string
+		Last4         string
+		Track2        string
+		Track2_crc    string
+		Track2_length int
+	}
+}
 
 type RequestPaymentResponse struct {
 	Servertime string `json:"servertime"`

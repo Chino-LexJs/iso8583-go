@@ -16,6 +16,7 @@ func PostRequestPayment(w http.ResponseWriter, r *http.Request) {
 	terminalJson, _ := json.Marshal(terminal)
 	terminalJsonString := string(terminalJson)
 	message_request := models.Message_request{Mti: "0200", Content: datatypes.JSON([]byte(terminalJsonString))}
+
 	createdRequest := db.DB.Create(&message_request)
 	err_createdRequest := createdRequest.Error
 	if err_createdRequest != nil {

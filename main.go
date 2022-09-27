@@ -23,6 +23,7 @@ func main() {
 	// Home router
 	r.HandleFunc("/", routes.HomeHandler)
 	r.HandleFunc("/requestPayment", routes.PostRequestPayment).Methods("POST")
+	r.HandleFunc("/executePayment", routes.ExecutePayment).Methods("POST")
 	// start server
 	http.ListenAndServe(":3000", r)
 }
